@@ -1,7 +1,27 @@
 import React from 'react';
-import {formatPrice } from '../helpers';
+import PropTypes from 'prop-types';
+import { formatPrice } from '../helpers';
+
+export const fishShape = PropTypes.shape({
+    image: PropTypes.string,
+    name: PropTypes.string,
+    desc: PropTypes.string,
+    status: PropTypes.string,
+    price: PropTypes.number
+});
 
 class Fish extends React.Component {
+    static propTypes = {
+        details: PropTypes.shape({
+            image: PropTypes.string,
+            name: PropTypes.string,
+            desc: PropTypes.string,
+            status: PropTypes.string,
+            price: PropTypes.number
+        }),
+        addToOrder: PropTypes.func
+    }
+
     addToOrder = () => {
         this.props.addToOrder(this.props.index);
     }
@@ -9,7 +29,7 @@ class Fish extends React.Component {
     render() {
         const { image, name, desc, status, price } = this.props.details;
         const isAvaiable = status === 'available';
-        
+
 
         return (
             <li className="menu-fish">
